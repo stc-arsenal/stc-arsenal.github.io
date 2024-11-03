@@ -111,14 +111,12 @@
 </head>
 
 <body>
-    <!--
 
-    庆祝期间无需验证
 
     <div class="login-card">
         <img src="https://talresource-pro-cdn.jiaoyanyun.com/online_frontend_jyresource/img/logo.66f689fb.png">
 
-        <h1>登录</h1>
+        <h1>验证页面</h1>
         <input type="password" id="token" placeholder="输入通行证 ID">
 
         <br>
@@ -129,76 +127,58 @@
             <a href="javascript:alert(&#39;由于网站被某只狗长期盗用，而这只狗作恶多端，毫无感恩之心，该网站的管理员设置了通行证验证。\n\n[About the Firewall]\nCloudflare × Github Pages\nVersion: 24.0\nBuild Time: 2024-09-13 07:51:23 (UTC+8)\nDevCode:DogInArmyFirewall&#39;)">此页面和此页面的相关技术</a>
         </div>
         <div class="secret">
-            <a>4F0ACC03-21D5-F8C7-0051-3CCC6C23848A</a>
+            <a>别看了大邦，这里什么也没有</a>
         </div>
         <div class="verifyA"><input type="button" onclick="verify()" value="验证"></input></div>
     </div>
 
     <script>
         function verify() {
+            var token = document.getElementById('token');
+
+            // 创建一个新的 XMLHttpRequest 对象
+            var xhr = new XMLHttpRequest();
+
+            // 配置请求：方法为 GET，URL 为目标地址
+            xhr.open('GET', 'https://stc-arsenal.github.io/jiaoyanyun/user_config', true);
+
+            // 设置请求完成后的回调函数
+            xhr.onreadystatechange = function () {
+                // 检查请求是否完成
+                if (xhr.readyState === 4) {
+                    // 检查响应状态码是否为 200（成功）
+                    if (xhr.status === 200) {
+                        // 输出响应内容到控制台
+                        if (xhr.responseText = token){get()}
+                    } else {
+                        console.error('请求失败，状态码：' + xhr.status);
+                    }
+                }
+            };
+
+            // 发送请求
+            xhr.send();
+
+            }
+
+        function get() {
             var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
             var post = { appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3 }
             var xhr = new XMLHttpRequest();
             var data = JSON.stringify(post);
             var token = document.getElementById('token');
             console.log(token)
-            if (token.value == "4F0ACC03-21D5-F8C7-0051-3CCC6C23848A") {
                 xhr.open("POST", jiexiurl, false);
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.onload = function () {
                     var json = JSON.parse(this.responseText);
                     window.location.replace(json.data.url)
                 }
-                xhr.send(data);
-            }
-            else {
-                
-            }
+            xhr.send(data);
         }
+        
     </script>
-    -->
 
-    <div class="login-card">
-        <img src="https://talresource-pro-cdn.jiaoyanyun.com/online_frontend_jyresource/img/logo.66f689fb.png">
-
-        <h1>特殊活动！</h1>
-        <a>根据管理员的设置，2024.10.26~2024.11.2期间，</a><br>
-        <a>您无需通行证即可通过此入口访问。</a><br><br>
-
-        <div class="grey">
-            <a>管理员留言：军犬失恋（笑）</a>
-        </div>
-
-        <br>
-        <div class="link">
-            <a href="javascript:alert(&#39;瞅我干啥？找管理员去啊！&#39;)">没有通行证？</a>            <br>
-        </div>
-        <div class="link">
-            <a href="javascript:alert(&#39;由于网站被某只狗长期盗用，而这只狗作恶多端，毫无感恩之心，该网站的管理员设置了通行证验证。\n\n[About the Firewall]\nCloudflare × Github Pages\nVersion: 24.0\nBuild Time: 2024-09-13 07:51:23 (UTC+8)\nDevCode:DogInArmyFirewall&#39;)">此页面和此页面的相关技术</a>
-        </div>
-        <div class="secret">
-            <a></a>
-        </div>
-        <div class="verifyA"><input type="button" onclick="verify()" value="验证"></input></div>
-    </div>
-
-    <script>
-        function verify() {
-            var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
-            var post = { appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3 }
-            var xhr = new XMLHttpRequest();
-            var data = JSON.stringify(post);
-            var token = document.getElementById('token');
-
-                xhr.open("POST", jiexiurl, false);
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.onload = function () {
-                    var json = JSON.parse(this.responseText);
-                    window.location.replace(json.data.url)
-                }
-                xhr.send(data);
-            }
-    </script>
 </body>
 
 </html>
