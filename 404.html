@@ -127,7 +127,7 @@
         <div class="tokenerr" style="display: none;">
             <a>通行证错误。</a>
         </div>
-        <input type="text" id="token" placeholder="输入通行证 ID">
+        <input type="password" id="token" placeholder="输入通行证 ID">
 
         <br>
         <div class="link">
@@ -145,21 +145,18 @@
     </div>
 
     <script>
+        var loginerr = document.querySelector("body > div.login-card > div.tokenerr")
         var pass = "别看了大邦，gjq这个捞女已经抛弃你了，而我的楚姐姐还在给我喂饼干吃呢~"
         function verify() {
             var content = document.getElementById('token').value;
             var hash = md5(content).toString();
-            console.log("输入内容："+content)
-            console.log("输入hash："+hash); 
             var xhr = new XMLHttpRequest();
             // 加油大邦，你能看懂
             fetch('https://stc-arsenal.github.io/jiaoyanyun/user_config')
                 .then(response => response.text())
                 .then(data => {
                     // 输出获取到的 HTML 内容
-                    console.log("获得的TOKEN："+data);
-                    if (data == hash){pass="1";get()}else{console.log("错误")};
-
+                    if (data == hash){pass="1";get()}else{loginerr.style = "display:block";};
                 })
         };
             
