@@ -30,10 +30,6 @@
             width: 330px;
         }
 
-        .login-card img {
-            width: 100px;
-        }
-
         .grey {
             color:#666
         }
@@ -59,11 +55,12 @@
             width: 36%;
             padding: 0%;
             margin: 0px 0px 0px 65%;
-            height: 30px;
+            height: 32px;
             border: none;
             background-color: #0078d4;
             color: white;
             cursor: pointer;
+            font-size: 15px;
 
         }
 
@@ -114,6 +111,7 @@
         }
         
     </style>
+    <link rel="icon" type="image/x-icon" href="https://www.jiaoyanyun.com/logo.png">
 </head>
 
 <body>
@@ -121,9 +119,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
     <div class="login-card">
-        <img src="https://talresource-pro-cdn.jiaoyanyun.com/online_frontend_jyresource/img/logo.66f689fb.png">
+        <img width="100px" src="https://talresource-pro-cdn.jiaoyanyun.com/online_frontend_jyresource/img/logo.66f689fb.png">
 
-        <h1>验证页面</h1>
+        <h1>登录</h1>
         <div class="tokenerr" style="display: none;">
             <a>通行证错误。</a>
         </div>
@@ -131,22 +129,28 @@
 
         <br>
         <div class="link">
-            <a href="javascript:alert(&#39;瞅我干啥？找管理员去啊！&#39;)">没有通行证？</a>            <br>
+            <a href="https://login.jiaoyanyun.com/#/login">没有通行证？</a><br>
         </div>
         <div class="link">
-            <a href="javascript:alert(&#39;由于网站被某只狗长期盗用，而这只狗作恶多端，毫无感恩之心，该网站的管理员设置了通行证验证。\n\n[About the Firewall]\nCloudflare × Github Pages\nVersion: 24.0\nBuild Time: 2024-09-13 07:51:23 (UTC+8)\nDevCode:DogInArmyFirewall&#39;)">此页面和此页面的相关技术</a>
+            <a href="javascript:tech()">此页面和此页面的相关技术</a>
         </div>
-        <!--<img src="https://github.com/stc-arsenal/stc-arsenal.github.io/actions/workflows/pages/pages-build-deployment/badge.svg">-->
-        <div class="secret">
-            <a>别看了大邦，这里什么也没有……</a><br>
-            <a>还是多把脑子用在怎么挽回你的前女友上吧（大笑）</a>
-        </div>
+        <img src="https://github.com/stc-arsenal/stc-arsenal.github.io/actions/workflows/pages/pages-build-deployment/badge.svg" height="16px"><p></p>
+        <!--<a>登录或完成注册即代表阅读并接受</a><a href="https://app.saasz.vdyoo.com/slide/jyy-policy/agreement.html" target="_blank">《教研云用户协议》</a><a>和</a><a href="https://app.saasz.vdyoo.com/slide/jyy-policy/policy.html" target="_blank">《用户个人信息保护政策》</a>-->
         <div class="verifyA"><input type="button" onclick="verify()" value="验证"></input></div>
     </div>
 
     <script>
+        fetch('https://api.github.com/repos/stc-arsenal/stc-arsenal.github.io/actions/runs')
+            .then(response => response.text())
+            .then(data => {
+                // 输出获取到的 HTML 内容
+                var buildtime = (JSON.parse(data).workflow_runs[0].created_at)
+                console.log(buildtime)
+            })
+
         var loginerr = document.querySelector("body > div.login-card > div.tokenerr")
         var pass = "别看了大邦，gjq这个捞女已经抛弃你了，而我的楚姐姐还在给我喂饼干吃呢~"
+
         function verify() {
             var content = document.getElementById('token').value;
             var hash = md5(content).toString();
@@ -160,6 +164,10 @@
                 })
         };
             
+        function tech() {
+            window.alert('由于网站被某只狗长期盗用，而这只狗作恶多端，毫无感恩之心，该网站的管理员设置了通行证验证。\n\n[About the Firewall]\nCloudflare × Github Pages\nBuild Time: 2024-11-15T18:05:42Z\nDevCode:DogInArmyFirewall')
+        }
+
         function get() {
             if (pass == "1"){
             var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
@@ -167,12 +175,11 @@
             var xhr = new XMLHttpRequest();
             var data = JSON.stringify(post);
             var token = document.getElementById('token');
-            console.log(token)
                 xhr.open("POST", jiexiurl, false);
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.onload = function () {
                     var json = JSON.parse(this.responseText);
-                    window.location.replace(json.data.url)
+                    location.assign(json.data.url)
                 }
             xhr.send(data);
         }else{
