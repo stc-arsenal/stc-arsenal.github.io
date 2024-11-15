@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取输入内容示例</title>
+</head>
+<body>
+    <input type="text" id="token" value="示例内容">
+    <button onclick="getInputValue()">获取输入内容</button>
+
+    <script>
+        function getInputValue() {
+            // 获取 id 为 "token" 的 input 控件
+            const inputElement = document.getElementById("token");
+            // 获取 input 控件的值
+            const inputValue = inputElement.value;
+            // 输出值到控制台
+            console.log(inputValue);
+        }
+    </script>
+</body>
+</html>

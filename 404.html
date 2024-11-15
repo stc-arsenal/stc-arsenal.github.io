@@ -127,7 +127,7 @@
         <div class="tokenerr" style="display: none;">
             <a>通行证错误。</a>
         </div>
-        <input type="password" id="token" placeholder="输入通行证 ID">
+        <input type="text" id="token" placeholder="输入通行证 ID">
 
         <br>
         <div class="link">
@@ -141,18 +141,21 @@
             <a>别看了大邦，这里什么也没有……</a><br>
             <a>还是多把脑子用在怎么挽回你的前女友上吧（大笑）</a>
         </div>
-        <div class="verifyA"><input type="button" onclick="get()" value="验证"></input></div>
+        <div class="verifyA"><input type="button" onclick="verify()" value="验证"></input></div>
     </div>
 
     <script>
         function verify() {
-            const content = document.getElementById('token');
-            const hash = md5(content).toString();
-            console.log(hash); 
+            var content = document.getElementById('token').value;
+            var hash = md5(content).toString();
+            console.log("输入内容："+content)
+            console.log("输入hash："+hash); 
             var xhr = new XMLHttpRequest();
             // 加油大邦，你能看懂
             xhr.open('GET', 'https://stc-arsenal.github.io/jiaoyanyun/user_config', true);
-            xhr.onload = function () {if (JSON.stringify(xhr.responseText) == hash){get()}else{console.log("错误")}}
+            var remotetoken = xhr.responseText;
+            console.log("获得的TOKEN："+remotetoken)
+            xhr.onload = function () {if (remotetoken == hash){get()}else{console.log("错误")}}
             xhr.send();
         };
             
