@@ -147,16 +147,6 @@
     </div>
 
     <script>
-        
-
-        fetch('https://api.github.com/repos/stc-arsenal/stc-arsenal.github.io/actions/runs')
-            .then(response => response.text())
-            .then(data => {
-                // 输出获取到的 HTML 内容
-                var buildtime = (JSON.parse(data).workflow_runs[0].created_at)
-                console.log(buildtime)
-            })
-
         var loginerr = document.querySelector("body > div.login-card > div.tokenerr")
         var pass = "别看了大邦，gjq这个捞女已经抛弃你了，而我的楚姐姐还在给我喂饼干吃呢~"
 
