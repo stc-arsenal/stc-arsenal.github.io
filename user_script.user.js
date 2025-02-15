@@ -135,7 +135,7 @@
                             // var result = document.createElement("div");
                             // 解析返回的结果为JSON对象
                             var json = JSON.parse(this.responseText);
-
+                            
                             // 处理答案
 
                             //    // ========答案开始======== \\
@@ -224,7 +224,7 @@
         function removeOrigin(){
             var style3 = document.createElement('style');
             style3.type = 'text/css';
-            style3.textContent = '.talqs_main.clearfix{display:none};.talqs{display:none}'
+            style3.textContent = '.talqs_main.clearfix{display:none};.talqs{display:none!important}'
             document.head.appendChild(style3);
             button2.innerHTML = "原题已隐藏";
         }
