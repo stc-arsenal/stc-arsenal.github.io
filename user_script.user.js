@@ -6,7 +6,8 @@
 // @version      Release-1.4.2
 // @description  军火库项目助手，用于协助排版/打印/解析处理
 // @match        https://ziyuanyetnt.jiaoyanyun.com
-// @match        https://stc-arsenal.github.io
+// @match        https://stc-arsenal.github.io/*
+// @match        https://stc-arsenal.github.io/
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
 // @license      GPL-3.0
@@ -16,9 +17,9 @@
 
 (function() {
     'use strict';
-
-    let user_script_check = document.querySelector("body > div > div.userjs")
-    user_script_check.style = "display: none"
+    const host = window.location.hostname;
+    function main (){
+    if (host === "a.com") {      
     var startTime = new Date().getTime();
 
     var div22 = document.querySelector("body > div.loading-container")
@@ -170,9 +171,6 @@
                         if (analysis !== null && Array.isArray(analysis)) {
                             // 正常单一解析
                             answer = json.data.question.list[0].answer[0];
-                            // if (json.data.question.list[0].answer[1] != undefined) {answer += json.data.question.list[0].answer[1]}
-                            // if (json.data.question.list[0].answer[2] != undefined) {answer += json.data.question.list[0].answer[2]}
-                            // if (json.data.question.list[0].answer[3] != undefined) {answer += json.data.question.list[0].answer[3]}
                             analysis = json.data.question.list[0].analysis[0].replace(/<p><br\/>【详解】<br\/>/g, "").replace(/<p><br\/>/g, "");
                             var element1 = document.querySelector(outputanswer);
                             element1.innerHTML = answer;
@@ -180,6 +178,7 @@
                         } else if (json.data.question.list[0].childList[0]) {
                             // 解答题分项解析
                             let i = 0;let branch_number = 1
+                            analysis = ""
                             while (json?.data?.question?.list?.[0]?.childList?.[i]?.analysis?.[0]) {
                                 analysis += json.data.question.list[0].childList[i].analysis[0].replace(/<p>/, "<p>（" + branch_number + "）")
                                 i++;
@@ -392,4 +391,16 @@
         div22.style.display = 'none';
     }
     setTimeout(buttonA, 1500);
+}}
+
+    function login(){
+        let user_script_check = document.querySelector("body > div > div.userjs")
+        user_script_check.style = "display: none"       
+    }
+
+    if (host === "a.com") {
+        main();
+      } else if (host === "b.com") {
+        login();
+      }
 })();
