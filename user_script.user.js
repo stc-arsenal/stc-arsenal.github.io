@@ -54,7 +54,7 @@
         // CSS：处理打印内容
         var style4 = document.createElement('style');
         style4.type = 'text/css';
-        style4.textContent = '@media print and (color) { .print-paragraph{font-weight:300!important;font-size:21px!important;line-height:1.8!important} audio{display:none;} *{-webkit-print-color-adjust: exact!important;print-color-adjust: exact!important}} @media print{ *{visibility: visible!important;opacity:1!important} .no-print{display:none!important} .maskDiv {display:none!important} @page{margin: 15mm 10mm 10mm 10mm!important;}.talqs img {line-height: 2.3em!important}.talqs{font-size:20px !important;line-height:2 !important}.print-title[data-v-faad0e22]{font-weight:700;font-size: 40px!important;line-height: 32px!important};}'
+        style4.textContent = '@media print and (color) { .print-paragraph{font-weight:300!important;font-size:21px!important;line-height:1.8!important} audio{display:none;} *{-webkit-print-color-adjust: exact!important;print-color-adjust: exact!important}} @media print{ *{visibility: visible!important;opacity:1!important} .no-print{display:none!important} .maskDiv {display:none!important} @page{margin: 15mm 10mm 10mm 10mm!important;}.talqs img {line-height: 2.3em!important}.talqs{font-size:20px !important;line-height:2 !important}.print-title {font-weight:700;font-size: 40px!important;line-height: 32px!important};}'
         document.head.appendChild(style4);
 
         // CSS：处理print-tool
