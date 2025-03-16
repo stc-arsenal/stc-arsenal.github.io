@@ -3,7 +3,7 @@
 // @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAIvklEQVR4XuWbCXCV1RXHf+d7YQuLIISlCrS2BYUITgVZdaYgNLUKsuowrUYUrKJICwFZLGGUIkEoUnCBsjmVUaDQgDhRCm2VrUI7yBIWZWiwVDaFsifk3dO57+WF5OUl7/teXtq07868mczkfuf87/+ec+45536fUNVjoqZQyD1g2gNtQduANAHqF/0sggvBn54BOQwcAmc/SXzEDDldlRClSoQ/r3dizDCUPiipoDHqEUXYh7ARx1nBy/LXeOONEVgEGOO1PpiRGIaDtos30KA8ycVhCTgLyRJrNZUelScgUxty2YxBGY1qo0ojciNA5CzCPJKduWTKOTePlDcndgJUhQn+dFRmoppSGRAxPytyGtEJzPQtQ0RjkRMbARO0Fca/AqVHLErj/oywFcc3jJlyzKts7wRkaA/UrAFt6lVZ1c6XU4gzkFmy1YsebwRkFA4HeR3Vml6U/MfmihSAPsWspCVudbojYKX62Glmofozt4L/q/NEfkVnJ4Oh4o+GIzoBgcX716D0iyasWv1fWEdn38BoJEQnIMM/539m58N3wFrCLN/PK9qYigmwPq8srlY76xWM8HhFMaF8Amy0x2yutgHPLRGBwOj0Ku90iEyAPef9Zmf1O+rcrrqML5zC53SOlCeUJcBmeOP9H1ebJCfWNZfhgK1k+e4OzxjLEjC+8DGMLTj+D4fDcLKSlpZcWWkCbGFzyRyuqtz+5hvgwfZC2q1C2xRoXh8cgZMX4fBp2HhYWbNXOXq2isi3tUNdp03JAqo0AeP9mRidGm/1duFT+wiPdhJq+Co+ePxGWbVHmfR+FRHhyDSyfJmhNV5HY+t5NXnxLmn7t4elQx0aJUdPOUoSf+GqMjpbWbYrpiKv/D0MlNJO61A/oQQB/rEYfSWeuz+ii7BwsFMpkRM2GLL+FGcSHBlHlm+2BXadgHH+/fHs5AxIhdU/cXCsk1dyPPauibMlSC6v+GyPsogA28Mr9O+qJM7ix1PqQm6GQ5O6lV+8FXqpQLljjuHzr+KFEEjydbI9xiDC8f7ZGK0wZ/aieuEgYUTXypl+uL53dxsefjuOruDIHLJ8Y4MEZPj3oHq7l0WWN7dRHTj+gkOdGvHZ/ZAeY5Q2WYYj8bICkb3M8nUQbN/+mjkZe+u6NBVPdhXeGBTf3Q9pGLfeMPujeFmBKDWcZkKGDkL9q+Ox+1bG0qFCeueqISDnoPLDxSZeUEF8g4UM/y9QnRYPqQ1qwfZnHdo1i27+NuEZ9FZwMb97xMHn4rQ4eErpMs9wPj8eaO0RIFMtAW+jOixWkc3qwRNdhIc6Cu2b4frYm/ahIXNj0Jwz+whT+7qzGhsL9p2AlXuU3/xFA2l0zENkhZBRuBOlk1chtXwwsZfwfC+hVlL0HS8p/5NjSo8FhsIia05yYOsoh7taeZOTX6i8vFmZsVnJj9r9i7BCYZe1gKOoftMLATc1gA2PO3T8hjfAVseZS0r3+YbPzpTW+N0msO2Z2HKHPf9U7ltsOH7eyyoCLvB3S8AZVBu7fbR1Q9gyyuHmht4Xf+iU8qMl5R9l324MG4Y7tG3qXfY/zik9FxjyvFyUiXxlCch32/ZKrhE01Ttu8g7wz0eUgcsNX18JUt0kGc5cLvv3jXVgbbrDPbd417H7eNC1Ll9zuZ0iBZ4ImJ4mTOrtLliFIJy+qEz9UFm4Q/Er1KsJr/aXQMmbcyg4K60tDOkgPJetXCwAWzGP7CpM6yuk1PNGxC83GSbnuMwVighw5QIt6sORid4zvCk5humbbM4B990Gs++3MqDVdBMgxA4bBPMmOVy5BmPfM7x/AK4ZmNJbeDHNG+FXrim3zDCccHN5XuQCroLgcz2Fuf29gQkFvZWfauCYbFxUHEWq7tI7CUsfCsq3gTL8GZdGHZg2Jtvw6hYXVhAMgu6OwU1POvT6jjdzjAR68+fKvW8awuFZyVbH9+Oko/ebLjLGomPQVSJ0bLJDyxgif0kS9n6p3P2a4V9XI+/nDbXh46cdbm9ROaK/OKcBF4s6gomQu1Q4f4ZDTY8JT0kA+04oaYuin9U2x8gZ4ZDaPHYSCgqVWhNdEWBTYXfF0PkXHerX9g7Kpq5v7FDGrleuFga7wLemQO6p0vvTrikcPA1GoXYSzH5A+GlXcZ1al5Rm+4kNXnBDgC2GXJbD1jR7fss9AZcLlHd2KzP/qBwuyvruagnzHnRYvkt5fXvpKPBUt2DXePTvDZ98EVxOmyYEUm0bQJNrute95WjQ1SoeoXLYznLREHnpB8Lke92fAqs+VYb+NgiiVUMCZ7pdoIjQfb6f7Xml4XVrbVNhH6oaIMjmDseKsrqVP3YY0tE9AdP/YJjyQZRToLghYnG4aIl1aQk7RvuixpXQBFuojFyt9Gsn2NZ4UtF9gHWJBlMMl8Kytbo14PxL15uohX4lez+sy1UWDRZP8afLPH+xFZULuFRLzGVTNDvdoV979zsRSfmOPKXb/Mjmuf0Zh66tKyd/3X6l/7Jo5h/eFLVIXbTFbaDaNcZ7NliSiL4L/Wz8LPK+9G0DH4xwb2XhUmwWeOdcw4GwAFtWW3hbPOgGri5G7r8N1j7qFJu0a58AXttmGLW2Yt9cMEB4urv7WBPSb11mwHLDewdcIIp4MeLhamxoB2HREKGBh2Nxxd8Mj7wTLIgqGjZUvPWwMOx77kk4f1V5YlXwTjHqKPdqLGgFri9HbcKyYIBD/9SKfdaCm5Kj/HqrC3Al0D/bQ3gpLTrJ2fuUUWujJ1jFosu9HLUzYrgeT20G6Z2F7q2F1OZQrxZ8fRn2fAnrc4OXm2eLegBRdydsgr1jsEXSA+2EDi3gxmS4kA/7T8C2PGXZTmXfSQ9So16PB6wgkV+QsAQk/CsyloSEfkkq5FIJ/ZpcMQmJ/KJkMQmJ/KqsJSHhX5YuJiFRX5cvmWck7AcTpUhI5E9mQkQk9EdTIRIS+rO5ki6RsB9OhhdhCfvpbKRqNCE/ni6vLK/mn8//G0rTzNDZb3VnAAAAAElFTkSuQmCC
 // @author       老班长
 // @namespace    https://greasyfork.org/zh-CN
-// @version      Release-1.6
+// @version      Release-1.6.0.1
 // @description  军火库项目助手，用于协助排版/打印/解析处理
 // @match        https://ziyuanyetnt.jiaoyanyun.com
 // @match        https://stc-arsenal.github.io/*
@@ -41,12 +41,62 @@
 
         // CSS：处理预览界面
         var style1 = document.createElement('style');
-        style1.textContent = '@import url(/main.css);';
+        style1.type = 'text/css';
+        style1.textContent = '.maskDiv{display:none !important}.talqs,.talqs *{border:none}.print-wrapper.transition[data-v-5cbc9a76]{margin:0px 0px 15px 0px}.print-question-body.is-analyze .talqs .talqs_analyze_group,.print-question-body.is-analyze .talqs .talqs_analyze_single{padding:0}.talqs .talqs_options .talqs_options_index{width:30px !important}.talqs .talqs_options .talqs_options_columns_4 .talqs_options_columns_item{width:23.5% !important}td{padding-left:5px;padding-right:5px}.print-question-index{height:40px;background-color:rgb(0,116,252);color:rgb(255,255,255) !important;border-radius:9px 0px;margin:3px auto;right:6px;position:relative;text-align:center;width:40px !important;font-size:20px !important;line-height:2 !important}.print-title[data-v-5cbc9a76]{page-break-after:avoid !important;padding:8px 0px !important;width:100%;height:52px;border-bottom:solid #b9d9fe 4px;display:flex;top:0px;position:relative;page-break-inside:avoid !important}.talqs_analyze_group{background-color:#ffffff !important}#app,body,html{background-color:#ffffff !important}.print-wrap{background-color:#fff !important}.print-title-index[data-v-b5955b8c]{position:relative;display:flex;margin:4px 0;padding:2px 0 4px 18px;width:90px;border-top-right-radius:0;border-top-left-radius:8px;text-wrap:nowrap;font-weight:700;font-size:32px;font-family:HarmonyOS Sans SC;line-height:54px;border-bottom:4px solid #b9d9fe;font-feature-settings:"tnum","tnum";font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:tabular-nums;font-variant-position:normal;pointer-events:auto;text-size-adjust:100%;-webkit-font-smoothing:antialiased}.print-title-body[data-v-b5955b8c],.print-title-index[data-v-b5955b8c]{box-sizing:border-box;height:60px;border-bottom-right-radius:0;border-bottom-left-radius:0;background-color:#e8f3ff;color:#005ad0;user-select:text;white-space-collapse:collapse;-webkit-tap-highlight-color:transparent}.print-title-body[data-v-b5955b8c]{position:absolute;top:12px;left:75px;z-index:1;display:flex;padding-top:2px;padding-right:12px;width:fit-content;border-top-right-radius:8px;border-top-left-radius:0;text-align:left;text-wrap:wrap;letter-spacing:normal;font-weight:700;font-style:normal;font-size:32px;font-family:HarmonyOS Sans SC;line-height:54px;border-bottom:4px solid #b9d9fe;font-feature-settings:"kern" 0;font-kerning:none;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:tabular-nums;font-variant-position:normal;text-decoration-skip-ink:none;text-size-adjust:100%;word-break:break-word;writing-mode:horizontal-tb;-webkit-font-smoothing:antialiased}.app-main{font-family:HarmonyOS Sans SC}.print-question-body.is-analyze .talqs .talqs_panel.watermark-wrap{padding-right:0;max-width:100%}';
         document.head.appendChild(style1);
+
+        // CSS：处理交互功能界面
+        var style2 = document.createElement('style');
+        style2.type = 'text/css';
+        style2.textContent = '.button{border:none;color:white;padding:5px 20px;text-align:center;text-decoration:none;display:inline-block;font-size:14px;margin:4px 2px;transition-duration:0.4s;cursor:pointer;border-radius:9px;}.button1{background-color:#3f92ff;border:2px solid #4CAF50}.button1:hover{background-color:#4CAF50;color:white}'
+        document.head.appendChild(style2);
+
+        // CSS：处理打印内容
+        var style4 = document.createElement('style');
+        style4.type = 'text/css';
+        style4.textContent = '@media print and (color) { .print-paragraph{font-weight:300!important;font-size:21px!important;line-height:1.8!important} audio{display:none;} *{-webkit-print-color-adjust: exact!important;print-color-adjust: exact!important}} @media print{ *{visibility: visible!important;opacity:1!important} .no-print{display:none!important} .maskDiv {display:none!important} @page{margin: 15mm 10mm 10mm 10mm!important;}.talqs img {line-height: 2.3em!important}.talqs{font-size:20px !important;line-height:2 !important}.print-title[data-v-faad0e22]{font-weight:700;font-size: 40px!important;line-height: 32px!important};}'
+        document.head.appendChild(style4);
+
+        // CSS：处理print-tool
+        var style5 = document.createElement('style');
+        style5.type = 'text/css';
+        style5.textContent = '.print-tool[data-v-b5955b8c] {width:225px}'
+        document.head.appendChild(style5);
 
         console.log("【教研云解析修复】开始运行");
 
         function loadEnd() {div22.style.display = 'none';}
+
+        window.moveUp = function moveUp(button) {
+            const currentDiv = button.closest('.print-wrapper');
+            const previousDiv = currentDiv.previousElementSibling;
+            if (previousDiv && previousDiv.classList.contains('movable')) {
+                currentDiv.style.transform = 'translateY(-110%)';
+                previousDiv.style.transform = 'translateY(110%)';
+                setTimeout(() => {
+                    currentDiv.style.transform = '';
+                    previousDiv.style.transform = '';
+                    currentDiv.parentNode.insertBefore(currentDiv, previousDiv);
+                }, 300);
+            }
+        }
+
+        window.test = function test() {console.log(1)}
+        window.addEventListener('load', test);
+
+        window.moveDown = function moveDown(button) {
+            const currentDiv = button.closest('.print-wrapper');
+            const nextDiv = currentDiv.nextElementSibling;
+            if (nextDiv && nextDiv.classList.contains('movable')) {
+                currentDiv.style.transform = 'translateY(110%)';
+                nextDiv.style.transform = 'translateY(-110%)';
+                setTimeout(() => {
+                    currentDiv.style.transform = '';
+                    nextDiv.style.transform = '';
+                    currentDiv.parentNode.insertBefore(nextDiv, currentDiv);
+                }, 300);
+            }
+        }
         function doSomething() {
             var startTime2 = new Date().getTime();
             var title23 = document.title
