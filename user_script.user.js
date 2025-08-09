@@ -363,7 +363,7 @@
         </style>
         <div class="tooltip tooltip1">
             <button style="font-size: 15px;display: inline-block;background-color: #000000;color: #F2C811;font-weight: bold;">[VIP] 军火库工具箱</button>
-            <div class="tooltiptext"><p>Release 1.5.2</p><p>Developed By 老班长</p></div>
+            <div class="tooltiptext"><p>Release 2.0</p><p>Developed By 老班长</p></div>
         </div></div>`;
             printButton2.insertBefore(newDiv2, printButton2.firstChild);
 

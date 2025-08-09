@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!--邦~邦~邦~邦邦邦~邦~邦~-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #f0f0f0, #d9d9d9);
+            font-family: Arial, sans-serif;
+            background-image: url(/background.svg);
+
+        }
+
+        .login-card {
+            background: white;
+            padding: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
+            width: 330px;
+        }
+
+        .grey {
+            color:#666
+        }
+
+        .login-card input {
+            width: 95%;
+            padding: 10px 10px 10px 2px;
+            margin: 10px 0;
+            border-left: 0px solid #ccc;
+            border-top: 0px solid #ccc;
+            border-right: 0px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+        }
+
+        .login-card h1 {
+            text-align: left;
+            margin: 10px 0px 15px 0px;
+            font-size: 28px;
+        }
+
+        .verifyA input {
+            width: 36%;
+            padding: 0%;
+            margin: 0px 0px 0px 65%;
+            height: 32px;
+            border: none;
+            background-color: #0078d4;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+
+        }
+
+        .login-card button:hover {
+            background-color: #005a9e;
+        }
+        
+        .login-choose {
+            background: white;
+            padding: 15px 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* text-align: center; */
+            width: 330px;
+            position: absolute;
+            top: 68%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        a {
+            margin: 5px 0px 0px 0px;
+            font-size: 14px;
+        }
+
+        .login-choose a {
+            font-size: 16px;
+        }
+
+        .link a:hover {color: #666;}
+
+        .link a {
+            color: #0078d4;
+            outline: 0;
+            text-decoration: none;
+        }
+
+        .link {
+            margin: 10px 0px 10px 0px;
+        }
+
+        .secret {
+            color: #FFFFFF
+        }
+
+        .tokenerr{
+            color:#FF0000
+        }
+
+        .userjs{
+            color:#ff9900;
+        }
+        
+    </style>
+    <link rel="icon" type="image/x-icon" href="https://www.jiaoyanyun.com/logo.png">
+</head>
+
+<body>
+
+
+    <script src="/md5.js"></script>
+    <div class="login-card">
+        <img width="100px" src="https://talresource-pro-cdn.jiaoyanyun.com/online_frontend_jyresource/img/logo.66f689fb.png">
+
+        <h1>登录</h1>
+        <div class="tokenerr" style="display: none;">
+            <a>通行证错误。</a>
+        </div>
+        <div class="userjs">
+            <p>我们检测到你并没有安装“军火库工具箱”脚本，这可能导致部分功能不完整。</p>
+        </div>
+        <input type="password" id="token" placeholder="输入通行证 ID">
+
+        <br>
+        <div class="link">
+            <a href="https://login.jiaoyanyun.com/#/login">没有通行证？</a><br>
+        </div>
+        <!--<div class="link">
+            <a href="javascript:tech()">此页面和此页面的相关技术</a>
+        </div>-->
+        <img src="https://github.com/stc-arsenal/stc-arsenal.github.io/actions/workflows/pages/pages-build-deployment/badge.svg" height="16px"><p></p>
+        <!--<a>登录或完成注册即代表阅读并接受</a><a href="https://app.saasz.vdyoo.com/slide/jyy-policy/agreement.html" target="_blank">《教研云用户协议》</a><a>和</a><a href="https://app.saasz.vdyoo.com/slide/jyy-policy/policy.html" target="_blank">《用户个人信息保护政策》</a>-->
+        <div class="verifyA"><input type="button" onclick="verify()" value="验证"></input></div>
+    </div>
+
+    <script>
+        var loginerr = document.querySelector("body > div.login-card > div.tokenerr")
+        var pass = "别看了大邦，gjq这个捞女已经抛弃你了，而我的楚姐姐还在给我喂饼干吃呢~"
+
+        function verify() {
+            var content = document.getElementById('token').value;
+            var hash = md5(content).toString();
+            var xhr = new XMLHttpRequest();
+            // 加油大邦，你能看懂
+            fetch('https://stc-arsenal.github.io/jiaoyanyun/user_config')
+                .then(response => response.text())
+                .then(data => {
+                    // 输出获取到的 HTML 内容
+                    if (data == hash){pass="1";get()}else{loginerr.style = "display:block";};
+                })
+        };
+            
+        // function tech() {
+        //     window.alert('由于网站被某只狗长期盗用，而这只狗作恶多端，毫无感恩之心，该网站的管理员设置了通行证验证。\n\n[About the Firewall]\nCloudflare × Github Pages\nBuild Time: 2024-11-15T18:05:42Z\nDevCode:DogInArmyFirewall')
+        // }
+
+        function get() {
+            if (pass == "1") {
+                var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
+                var post = {appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3}
+                var xhr = new XMLHttpRequest();
+                var data = JSON.stringify(post);
+                var token = document.getElementById('token');
+                    xhr.open("POST", jiexiurl, false);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onload = function () {
+                        var json = JSON.parse(this.responseText);
+                        location.assign(json.data.url)
+                    }
+                xhr.send(data);
+            } else {
+                console.log(pass)
+                window.location.replace("https://www.bilibili.com/video/BV1CW4y1r7kH")}
+        }
+        
+    </script>
+
+</body>
+
+</html>

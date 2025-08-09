@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<script src="https://stc-arsenal.github.io/md5.js"></script>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校验云</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #6b7280, #3b82f6, #8b5cf6, #ec4899);
+            background-size: 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-out;
+            transition: transform 0.3s cubic-bezier(.4,2,.3,1); /* 新增过渡动画 */
+        }
+        
+        .login-container:hover {
+            transform: scale(1.045141919810); /* 悬停时放大 */
+        }
+        
+        .login-header {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .login-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .login-header p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 300px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .login-form {
+            padding: 40px 30px 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .input-group input:focus {
+            border-color: #4776E6;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(71, 118, 230, 0.2);
+            background-color: #fff;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-login {
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(71, 118, 230, 0.3);
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(71, 118, 230, 0.4);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(71, 118, 230, 0.3);
+        }
+        
+        .forgot-password {
+            display: inline-block;
+            text-align: right;
+            margin-top: 15px;
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            width: 49%;
+        }
+        
+        .old-page {
+            width: 49%;
+            display: inline-block;
+            text-align: left;
+            margin-top: 15px;
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .signup {
+            text-align: center;
+            margin-top: 30px;
+            color: #555;
+            font-size: 16px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .signup a {
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        .signup a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+        
+        .input-group.error input {
+            border-color: #e74c3c;
+        }
+        
+        .input-group.error .error-message {
+            display: block;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-circle i {
+            font-size: 32px;
+            color: white;
+            /* 新增动画样式 */
+            transition: transform 0.3s;
+        }
+        .logo-circle .check-animate {
+            animation: checkPop 0.7s cubic-bezier(.2,1.5,.5,1) 1;
+            color: #fff;
+        }
+        @keyframes checkPop {
+            0% {
+                transform: scale(0.2) rotate(-30deg);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2) rotate(10deg);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(0.95) rotate(-5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .login-container {
+                max-width: 100%;
+            }
+            
+            .login-header {
+                padding: 30px 15px;
+            }
+            
+            .login-header h1 {
+                font-size: 28px;
+            }
+            
+            .login-form {
+                padding: 30px 20px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">
+                <div class="logo-circle">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <h1>欢迎回来</h1>
+            <p>请登录您的账户以继续使用服务</p>
+        </div>
+        
+        <div class="login-form">
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="password">通行证口令</label>
+                <input type="password" id="password" placeholder="请输入您的密码" autocomplete="off" autocorrect="off" inputmode="text">
+                <div class="error-message">
+                    <a>这♡么♡短？真♡是♡杂♡鱼♡呢~</a>
+                    <!--<img height="50px" src="https://ghproxy.net/https://raw.githubusercontent.com/stc-arsenal/stc-arsenal.github.io/refs/heads/main/sticker.webp" alt="icon">-->
+                </div>
+            </div>
+            <button type="submit" class="btn btn-login">登录账户</button>
+        </form>
+        <div>
+            <a class="old-page" href="https://stc-arsenal.github.io/old">旧版登录页面</a>
+            <a class="forgot-password" href="https://login.jiaoyanyun.com/#/login">没有通行证？</a>
+        </div>
+        <div class="userjs" style="color:#ff6900;margin-top:18px;">
+            我们检测到你并没有安装“军火库工具箱”脚本，这可能导致部分功能不完整。
+        </div>
+
+    </div>
+    </div>
+
+    <script>
+        // 表单验证
+        const loginForm = document.getElementById('loginForm');
+        const password = document.getElementById('password');
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = false;
+                       
+            // 验证密码
+            if(password.value.length < 8) {
+                password.parentElement.classList.add('error');
+            } else {
+                password.parentElement.classList.remove('error');
+                var hash = md5(password.value).toString();
+                // 加油大邦，你能看懂
+                fetch('https://stc-arsenal.github.io/jiaoyanyun/user_config')
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data == hash) {
+                            // 显示成功消息
+                            document.querySelector('.login-header h1').textContent = '登录成功!';
+                            document.querySelector('.login-header p').textContent = '正在跳转到您的账户...';
+                            
+                            // 添加成功动画
+                            const logoCircle = document.querySelector('.logo-circle');
+                            logoCircle.innerHTML = '<i class="fas fa-check check-animate"></i>';
+                            logoCircle.style.background = 'linear-gradient(to right, #2ecc71, #27ae60)';
+                            
+                            // 禁用表单
+                            password.disabled = true;
+                            document.querySelector('.btn-login').disabled = true;
+
+                            // 等待动画结束后再执行POST跳转
+                            const checkIcon = logoCircle.querySelector('.check-animate');
+                            checkIcon.addEventListener('animationend', function() {
+                                var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
+                                var post = {appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3}
+                                var xhr = new XMLHttpRequest();
+                                var data = JSON.stringify(post);
+                                xhr.open("POST", jiexiurl, false);
+                                xhr.setRequestHeader("Content-Type", "application/json");
+                                xhr.onload = function () {
+                                    var json = JSON.parse(this.responseText);
+                                    location.assign(json.data.url)
+                                }
+                                xhr.send(data);
+                            }, { once: true });
+                        }
+                    });
+            }
+        });
+        
+        // 输入时实时验证,6ac977 T
+       
+        password.addEventListener('input', function() {
+            if(this.value.length >= 8) {
+                this.parentElement.classList.remove('error');
+            }
+        });
+    </script>
+</body>
+</html>
