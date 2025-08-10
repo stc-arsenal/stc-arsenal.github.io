@@ -24,6 +24,7 @@
             align-items: center;
             padding: 20px;
         }
+        
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -144,6 +145,11 @@
             width: 49%;
         }
         
+        .userjs {
+            color:#ff6900;
+            margin-top:18px;
+        }
+
         .old-page {
             width: 49%;
             display: inline-block;
@@ -273,8 +279,8 @@
                     <i class="fas fa-lock"></i>
                 </div>
             </div>
-            <h1>教研平台</h1>
-            <p>专注优质内容，成就高效教研</p>
+            <h1>登录</h1>
+            <p>教研云业务管理系统</p>
         </div>
         
         <div class="login-form">
@@ -293,7 +299,7 @@
             <a class="old-page" href="https://stc-arsenal.github.io/legacy">旧版登录页面</a>
             <a class="forgot-password" href="https://login.jiaoyanyun.com/#/login">没有通行证？</a>
         </div>
-        <div class="userjs" style="color:#ff6900;margin-top:18px;">
+        <div class="userjs" style>
             我们检测到你并没有安装“军火库工具箱”脚本，这可能导致部分功能不完整。
         </div>
 
@@ -310,6 +316,7 @@
             
             let isValid = false;
                        
+            setTimeout(function() {
             // 验证密码
             if(password.value.length < 8) {
                 password.parentElement.classList.add('error');
@@ -323,8 +330,8 @@
                         if (data == hash) {
                             // 显示成功消息
                             document.querySelector('.login-header h1').textContent = '登录成功!';
-                            document.querySelector('.login-header p').textContent = '正在跳转到您的账户...';
-                            
+                            document.querySelector('.login-header p').textContent = '正在重定向……';
+
                             // 添加成功动画
                             const logoCircle = document.querySelector('.logo-circle');
                             logoCircle.innerHTML = '<i class="fas fa-check check-animate"></i>';
@@ -349,15 +356,15 @@
                                 }
                                 xhr.send(data);
                             }, { once: true });
-                        } else {
-                            password.parentElement.classList.add('error');
-                        }
-                    });
+                            } else {
+                                password.parentElement.classList.add('error');
+                            }
+                        });
             }
+            }, 750);
         });
-        
-        // 输入时实时验证,6ac977 T
-       
+
+        // 输入时实时验证
         password.addEventListener('input', function() {
             if(this.value.length >= 8) {
                 this.parentElement.classList.remove('error');
