@@ -426,18 +426,18 @@
                         document.querySelector('.btn-login').disabled = true;
                         const checkIcon = logoCircle.querySelector('.check-animate');
                         checkIcon.addEventListener('animationend', function() {
-                                var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
-                                var post = {appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3}
-                                var xhr = new XMLHttpRequest();
-                                var data = JSON.stringify(post);
-                                xhr.open("POST", jiexiurl, false);
-                                xhr.setRequestHeader("Content-Type", "application/json");
-                                xhr.onload = function () {
-                                    var json = JSON.parse(this.responseText);
-                                    location.assign(json.data.url)
-                                }
-                                xhr.send(data);
-                            }, { once: true });
+                            var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
+                            var post = {appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3}
+                            var xhr = new XMLHttpRequest();
+                            var data = JSON.stringify(post);
+                            xhr.open("POST", jiexiurl, false);
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                            xhr.onload = function () {
+                                var json = JSON.parse(this.responseText);
+                                location.assign(json.data.url)
+                            }
+                            xhr.send(data);
+                        }, { once: true });
                     } else {
                         totpError.style.display = "block";
                     }
