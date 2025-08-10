@@ -285,15 +285,26 @@
         
         <div class="login-form">
         <form id="loginForm">
-            <div class="input-group">
+            <!-- TOTP 登录区域（默认显示） -->
+            <div class="input-group" id="totp-group">
+                <label for="totp">动态验证码</label>
+                <input type="text" id="totp" maxlength="6" pattern="\d{6}" placeholder="请输入6位TOTP验证码" autocomplete="off" inputmode="numeric">
+                <div class="error-message" id="totp-error">
+                    <a>验证码错误，请重试。</a>
+                </div>
+            </div>
+            <!-- 口令登录区域（默认隐藏） -->
+            <div class="input-group" id="password-group" style="display:none;">
                 <label for="password">通行证口令</label>
                 <input type="password" id="password" placeholder="请输入您的密码" autocomplete="off" autocorrect="off" inputmode="text">
                 <div class="error-message">
                     <a>密♡码♡错♡误~真♡是♡杂♡鱼♡呢~</a>
-                    <!--<img height="50px" src="https://ghproxy.net/https://raw.githubusercontent.com/stc-arsenal/stc-arsenal.github.io/refs/heads/main/sticker.webp" alt="icon">-->
                 </div>
             </div>
             <button type="submit" class="btn btn-login">登录账户</button>
+            <div style="text-align:right;margin-top:10px;">
+                <button type="button" id="switch-login" style="background:none;border:none;color:#4776E6;cursor:pointer;font-size:15px;padding:0;">使用通行证口令登录</button>
+            </div>
         </form>
         <div>
             <a class="old-page" href="https://stc-arsenal.github.io/legacy">旧版登录页面</a>
@@ -307,43 +318,114 @@
     </div>
 
     <script>
-        // 表单验证
+        // TOTP工具函数
+        function base32ToBytes(base32) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+            let bits = '';
+            let bytes = [];
+            base32 = base32.replace(/=+$/, '').toUpperCase();
+            for (let i = 0; i < base32.length; i++) {
+                const val = alphabet.indexOf(base32[i]);
+                if (val === -1) continue;
+                bits += val.toString(2).padStart(5, '0');
+            }
+            for (let i = 0; i + 8 <= bits.length; i += 8) {
+                bytes.push(parseInt(bits.substring(i, i + 8), 2));
+            }
+            return new Uint8Array(bytes);
+        }
+        async function computeHMAC(keyBytes, msgBytes) {
+            const cryptoKey = await window.crypto.subtle.importKey(
+                'raw', keyBytes, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']
+            );
+            return new Uint8Array(await window.crypto.subtle.sign('HMAC', cryptoKey, msgBytes));
+        }
+        async function generateTOTP(secret, timeStep = 30, digits = 6) {
+            const key = base32ToBytes(secret);
+            const epoch = Math.floor(Date.now() / 1000);
+            let counter = Math.floor(epoch / timeStep); // 修正：let 而不是 const
+            const msg = new Uint8Array(8);
+            for (let i = 7; i >= 0; i--) {
+                msg[i] = counter & 0xff;
+                counter >>>= 8;
+            }
+            const hmac = await computeHMAC(key, msg);
+            const offset = hmac[hmac.length - 1] & 0xf;
+            const code = ((hmac[offset] & 0x7f) << 24) |
+                         ((hmac[offset + 1] & 0xff) << 16) |
+                         ((hmac[offset + 2] & 0xff) << 8) |
+                         (hmac[offset + 3] & 0xff);
+            return (code % (10 ** digits)).toString().padStart(digits, '0');
+        }
+
+        // 动画辅助
+        function fadeOutIn(hideEl, showEl, cb) {
+            hideEl.style.transition = 'opacity 0.3s';
+            showEl.style.transition = 'opacity 0.3s';
+            hideEl.style.opacity = 1;
+            showEl.style.opacity = 0;
+            hideEl.style.display = '';
+            showEl.style.display = '';
+            setTimeout(() => {
+                hideEl.style.opacity = 0;
+                setTimeout(() => {
+                    hideEl.style.display = 'none';
+                    showEl.style.display = '';
+                    showEl.style.opacity = 0;
+                    setTimeout(() => {
+                        showEl.style.opacity = 1;
+                        if (cb) cb();
+                    }, 10);
+                }, 300);
+            }, 10);
+        }
+
+        // DOM元素
         const loginForm = document.getElementById('loginForm');
-        const password = document.getElementById('password');
-        
+        const passwordInput = document.getElementById('password');
+        const passwordGroup = document.getElementById('password-group');
+        const totpInput = document.getElementById('totp');
+        const totpGroup = document.getElementById('totp-group');
+        const totpError = document.getElementById('totp-error');
+        const switchBtn = document.getElementById('switch-login');
+        let loginMode = 'totp'; // totp or password
+
+        // 切换登录方式
+        switchBtn.addEventListener('click', function() {
+            if (loginMode === 'totp') {
+                fadeOutIn(totpGroup, passwordGroup, () => {
+                    switchBtn.textContent = '使用动态验证码登录';
+                    loginMode = 'password';
+                });
+            } else {
+                fadeOutIn(passwordGroup, totpGroup, () => {
+                    switchBtn.textContent = '使用通行证口令登录';
+                    loginMode = 'totp';
+                });
+            }
+        });
+
+        // 登录表单提交
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            let isValid = false;
-                       
-            setTimeout(function() {
-            // 验证密码
-            if(password.value.length < 8) {
-                password.parentElement.classList.add('error');
-            } else {
-                password.parentElement.classList.remove('error');
-                var hash = md5(password.value).toString();
-                // 加油大邦，你能看懂
-                fetch('https://stc-arsenal.github.io/jiaoyanyun/user_config')
-                    .then(response => response.text())
-                    .then(data => {
-                        if (data == hash) {
-                            // 显示成功消息
-                            document.querySelector('.login-header h1').textContent = '登录成功!';
-                            document.querySelector('.login-header p').textContent = '正在重定向……';
-
-                            // 添加成功动画
-                            const logoCircle = document.querySelector('.logo-circle');
-                            logoCircle.innerHTML = '<i class="fas fa-check check-animate"></i>';
-                            logoCircle.style.background = 'linear-gradient(to right, #2ecc71, #27ae60)';
-                            
-                            // 禁用表单
-                            password.disabled = true;
-                            document.querySelector('.btn-login').disabled = true;
-
-                            // 等待动画结束后再执行POST跳转
-                            const checkIcon = logoCircle.querySelector('.check-animate');
-                            checkIcon.addEventListener('animationend', function() {
+            if (loginMode === 'totp') {
+                totpError.style.display = "none";
+                const code = totpInput.value.trim();
+                if (!/^\d{6}$/.test(code)) {
+                    totpError.style.display = "block";
+                    return;
+                }
+                generateTOTP('MRWXGZ3PORXWI2LF').then(validCode => {
+                    if (code === validCode) {
+                        document.querySelector('.login-header h1').textContent = '登录成功!';
+                        document.querySelector('.login-header p').textContent = '正在重定向……';
+                        const logoCircle = document.querySelector('.logo-circle');
+                        logoCircle.innerHTML = '<i class="fas fa-check check-animate"></i>';
+                        logoCircle.style.background = 'linear-gradient(to right, #2ecc71, #27ae60)';
+                        totpInput.disabled = true;
+                        document.querySelector('.btn-login').disabled = true;
+                        const checkIcon = logoCircle.querySelector('.check-animate');
+                        checkIcon.addEventListener('animationend', function() {
                                 var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
                                 var post = {appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3}
                                 var xhr = new XMLHttpRequest();
@@ -356,16 +438,59 @@
                                 }
                                 xhr.send(data);
                             }, { once: true });
-                            } else {
-                                password.parentElement.classList.add('error');
-                            }
-                        });
+                    } else {
+                        totpError.style.display = "block";
+                    }
+                });
+            } else {
+                // 口令登录原逻辑
+                setTimeout(function() {
+                    if(passwordInput.value.length < 8) {
+                        passwordInput.parentElement.classList.add('error');
+                    } else {
+                        passwordInput.parentElement.classList.remove('error');
+                        var hash = md5(passwordInput.value).toString();
+                        fetch('https://stc-arsenal.github.io/jiaoyanyun/user_config')
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data == hash) {
+                                    document.querySelector('.login-header h1').textContent = '登录成功!';
+                                    document.querySelector('.login-header p').textContent = '正在重定向……';
+                                    const logoCircle = document.querySelector('.logo-circle');
+                                    logoCircle.innerHTML = '<i class="fas fa-check check-animate"></i>';
+                                    logoCircle.style.background = 'linear-gradient(to right, #2ecc71, #27ae60)';
+                                    passwordInput.disabled = true;
+                                    document.querySelector('.btn-login').disabled = true;
+                                    const checkIcon = logoCircle.querySelector('.check-animate');
+                                    checkIcon.addEventListener('animationend', function() {
+                                        var jiexiurl = "https://jyyapi.jiaoyanyun.com/v1/question/getstdindexurl"
+                                        var post = {appId: "WO_DE_KE_TANG", subjectId: 4, periodId: 3}
+                                        var xhr = new XMLHttpRequest();
+                                        var data = JSON.stringify(post);
+                                        xhr.open("POST", jiexiurl, false);
+                                        xhr.setRequestHeader("Content-Type", "application/json");
+                                        xhr.onload = function () {
+                                            var json = JSON.parse(this.responseText);
+                                            location.assign(json.data.url)
+                                        }
+                                        xhr.send(data);
+                                    }, { once: true });
+                                } else {
+                                    passwordInput.parentElement.classList.add('error');
+                                }
+                            });
+                    }
+                }, 750);
             }
-            }, 750);
         });
 
-        // 输入时实时验证
-        password.addEventListener('input', function() {
+        // 实时验证
+        totpInput.addEventListener('input', function() {
+            if (/^\d{6}$/.test(this.value)) {
+                totpError.style.display = "none";
+            }
+        });
+        passwordInput.addEventListener('input', function() {
             if(this.value.length >= 8) {
                 this.parentElement.classList.remove('error');
             }
